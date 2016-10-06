@@ -3,10 +3,11 @@
     padding: 0;
 }
 
-body {
+#body {
     font-family: "Apple Braille";
     background-image: url(http://www.zastavki.com/pictures/originals/2015/Backgrounds_Anonymous_in_the_matrix_096761_.jpg);
-    background-size: 100%;
+    background-size: cover;
+    background-position: center center;
     color: lawngreen;
     background-repeat: no-repeat;
 }
@@ -18,17 +19,21 @@ body {
 }
 
 .container {
-    width: 960px;
-    height: auto;
+    width: 100%;
+    height: 87.1vh;
     margin: 0 auto;
 }
 
 #logo {
     width: 200px;
-    height: 100px;
-    background-image: url("img/Camagru.png");
-    background-repeat: no-repeat;
+    height: 100px ;
+    text-align: center;
     float: left;
+}
+
+#logo img {
+    height: auto;
+    width: 100%;
 }
 
 #navigation {
@@ -64,16 +69,17 @@ body {
     background-color: rgba(0 ,0 ,0, 0.7);
     padding: 20px;
     border-radius: 5px;
+    box-sizing: border-box;
 }
 
 .login_container {
-    width: 500px;
+    width: 600px;
     height: 400px;
     text-align: center;
     margin: 0 auto;
     margin-top: 5%;
     border-radius: 4px;
-    background-color: rgba(0 ,0 ,0, 0.7);
+    background-color: rgba(0 ,0 ,0, 0.4);
 }
 
 .login_container img {
@@ -96,13 +102,20 @@ input[type="text"], input[type="password"]{
     padding: 15px 30px;
     background-color: lawngreen;
     border: none;
-    border: solid black 2px;
+    margin-bottom: 10px;
     font-weight: bold;
 }
 
 #footer {
     background-color: black;
-    height: 40px;
+    height: 30px;
     width: 100%;
+    color: lawngreen;
+}
 
+#footer p {
+    text-align: right;
+    margin-right: 20px;
+    font-weight: bold;
+    font-size: 20px;
 }

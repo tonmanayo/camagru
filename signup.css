@@ -1,0 +1,17 @@
+
+
+#first-name {
+    float:left;
+    width: 48%;
+}
+
+#surname {
+    float: right;
+    width: 48%;
+}
+
+#password, #email {
+    float: left;
+    width: 99.4%;
+}
+

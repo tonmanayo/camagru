@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="page_style.css">
-    <title>Login page</title>
+    <title>Login</title>
 </head>
 
 <body>
     <div id="header">
         <div class="container">
-            <div id="logo"> </div>
+            <div id="logo"><img src="img/Camagru.png"> </div>
             <div id="navigation">
                 <ul id="navtabs">
                     <a href=""><li>Home</li></a>
                     <a href=""><li>Profile</li></a>
                     <a href=""><li>Gallery</li></a>
-                    <a href=""><li>Create Account</li></a>
-                    <a href=""><li>Logout</li></a>
+                    <a href="signup.html"><li>Create Account</li></a>
+                    <a href=""><li>Logout</li></a>se
                 </ul>
             </div>
         </div>
@@ -26,24 +26,22 @@
         <div class="container page">
         <h1 style="text-align: center">Welcome to Camagru</h1>
             <h2 style="text-align: center">Please login or sign up</h2>
+            <div class="login_container">
+                <img src="https://thenecromongersblog.files.wordpress.com/2014/01/linux-matrix-binary-extreme-edition-punisher-hd-wallpaper-101034.jpg">
+                <form method="post">
+                    <div class="form-input">
+                        <input type="text" name="username" placeholder="Email Address">
+                    </div>
+                    <div class="form-input">
+                        <input type="password" name="password" placeholder="Password">
+                    </div>
+                    <input id="btn-login" type="submit" name="login" value="Login">
+                    <div> <a href="">Forgot Password?</a></div>
+                </form>
+            </div>
         </div>
-        <div class="login_container">
-            <img src="https://thenecromongersblog.files.wordpress.com/2014/01/linux-matrix-binary-extreme-edition-punisher-hd-wallpaper-101034.jpg">
-            <form>
-                <div class="form-input">
-                    <input type="text" name="username" placeholder="Email Address">
-                </div>
-                <div class="form-input">
-                    <input type="password" name="password" placeholder="Password">
-                </div>
-                <input id="btn-login" type="submit" name="submit" value="Login">
-               <div> <a href="">Forgot Password?</a></div>
-            </form>
-        </div>
+
     </div>
-    <div id="footer">
-        <div class="container">
-        </div>
-    </div>
+    <div id="footer"><p>Tony Mack © 2016 </p> </div>
 </body>
 </html>
