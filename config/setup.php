@@ -5,7 +5,7 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $sql = file_get_contents('construct.sql');
     $db = $conn->exec($sql);
-    echo "Connected successfully!\n";
+    echo "Connected and created successfully!\n";
 }
 catch(PDOException $e)
 {
