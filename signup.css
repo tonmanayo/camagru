@@ -2,12 +2,12 @@
 
 #first-name {
     float:left;
-    width: 47%;
+    width: 48%;
 }
 
 #surname {
     float: right;
-    width: 47%;
+    width: 48%;
 }
 
 #password, #email {
@@ -15,3 +15,8 @@
     width: 99.4%;
 }
 
+.error_input {
+    border: red solid 2px;
+    border-radius: 3px;
+    padding: 1px;
+}
