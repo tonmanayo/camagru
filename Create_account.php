@@ -73,9 +73,9 @@ http://e5r10p4:8080/camagru/verify.php?email='.$email.'&hash='.$password_h.'
 
                 $headers = 'From:noreply@e5r10p4.com' . "\r\n";
                 if (mail($to, $subject, $message, $headers))
-                    echo "totoooooooooooooooooo";
+                    header('Location: login.php');
                 else
-                    echo "jwqbeiuwquehwquiehuiwqhe";
+                    echo "bad";
 
             }
         }

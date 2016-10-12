@@ -33,7 +33,7 @@ include_once "config/database.php";
         <h1 style="text-align: center">ACCOUNT VERIFIED</h1>
         <div class="login_container" style="border: solid silver 3px ; padding: 1%">
             <br /><br />
-            <h2 style="padding-top: 20%" ><a href="login.html"> click here to verify account and return to login
+            <h2 style="padding-top: 20%" ><a href="../old/login.html"> click here to verify account and return to login
                     <?php
                     $conn = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
                     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
