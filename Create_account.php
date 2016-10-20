@@ -39,19 +39,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         try {
             $conn = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $val = $conn->prepare("INSERT INTO users (name, surname, email, password ) VALUES (:name, :surname, :email, :password)");
-            $result = $conn->prepare('SELECT * FROM users WHERE email = :email');
-            $result->bindParam(':email', $email);
+            $val = $conn->prepare("INSERT INTO users (Name, Surname, Email, Password ) VALUES (:Name, :Surname, :Email, :Password)");
+            $result = $conn->prepare('SELECT * FROM users WHERE Email = :Email');
+            $result->bindParam(':Email', $email);
             $result->execute();
             if ($result->rowCount() > 0) {
                 $err_str = $err_str . " * Email Address Already Exists!";
                 $err_email = 1;
             }
             if (!$err_email){
-                $val->bindParam(':name', $name);
-                $val->bindParam(':surname', $surname);
-                $val->bindParam(':password', $password_h);
-                $val->bindParam(':email', $email);
+                $val->bindParam(':Name', $name);
+                $val->bindParam(':Surname', $surname);
+                $val->bindParam(':Password', $password_h);
+                $val->bindParam(':Email', $email);
                 $val->execute();
 
                 $to      = $email;
@@ -73,7 +73,7 @@ http://e5r10p4:8080/camagru/verify.php?email='.$email.'&hash='.$password_h.'
 
                 $headers = 'From:noreply@e5r10p4.com' . "\r\n";
                 if (mail($to, $subject, $message, $headers))
-                    header('Location: login.php');
+                    header('Location: index.php');
                 else
                     echo "bad";
 

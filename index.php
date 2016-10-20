@@ -13,19 +13,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
         $conn = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $get_hash = $conn->prepare("SELECT password FROM users WHERE email= :email");
-        $get_hash->bindParam(':email', $email);
+        $get_hash = $conn->prepare("SELECT Password FROM users WHERE Email= :Email");
+        $get_hash->bindParam(':Email', $email);
         $get_hash->execute();
         $hash = $get_hash->fetchColumn();
 
         if (password_verify($password, $hash)) {
-            $val = $conn->prepare("SELECT email, Verify FROM users WHERE email= :email AND Verify= :Verify");
-            $val->bindParam(':email', $email);
+            $val = $conn->prepare("SELECT Email, Verify FROM users WHERE Email= :Email AND Verify= :Verify");
+            $val->bindParam(':Email', $email);
             $val->bindParam(':Verify', $Verify);
             $val->execute();
             if ($val->rowCount() > 0) {
                 $_SESSION['loggued_on_user'] = $email;
-                header("Location: Create_account.php");
+                header("Location: home.php");
             }
         } else {
             $err_str = "bad email, password combination or email not verified";
