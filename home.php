@@ -27,8 +27,6 @@ if (isset($_SESSION['loggued_on_user'])){
     $file_location2 = "/usr/" . $_SESSION['loggued_on_user'] . "/";
 
     if (isset($_POST['upload']) && $_POST['upload'] == true ) {
-
-
         $img = str_replace('data:image/png;base64,', '', $selfie);
         $img = str_replace(' ', '+', $img);
         $img = base64_decode($img);
@@ -39,7 +37,17 @@ if (isset($_SESSION['loggued_on_user'])){
         exit();
     }
 
-    if (isset($_POST['submit']) && $_POST['submit'] == true) {
+if (isset($_POST['submitpic']) && $_POST['submitpic'] == true) {
+    $conn = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $sql = "INSERT INTO pictures (email, Picture, Comment) VALUES (?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute(array($_SESSION['loggued_on_user'], $file_location2, $_POST['usercomment']));
+    echo "success";
+    exit();
+}
+
+    if (isset($_POST['submit1']) && $_POST['submit1'] == true) {
         $target_file = $file_location . basename($_FILES["fileToUpload"]["name"]);
         $uploadOk = 1;
         $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
@@ -73,12 +81,10 @@ if (isset($_SESSION['loggued_on_user'])){
         }
         else {
             if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                $img = imagecreatefrompng($file_location . basename($_FILES["fileToUpload"]["name"]));
+                echo $overlay;
+                $img = file_get_contents($file_location . basename($_FILES["fileToUpload"]["name"]));
                 $selfienew =  merge_img($img, $overlay);
-                imagepng($selfienew, $file_location . $file_name . date());
-
-                echo $file_location2 . basename($_FILES["fileToUpload"]["name"]);
-                exit();
+                imagepng($selfienew, $file_location . $file_name);
             } else {
                 $err_upload = $err_upload . " Sorry, there was an error uploading your file.";
             }
@@ -123,7 +129,7 @@ else
             <div>
                 <input id="comments" placeholder="Write a Comment..." type="text">
             </div>
-            <button  id="submit btn-login" class="btnStyle">Submit</button>
+            <button  id="submit" class="btnStyle" name="sumbitpic1">Submit</button>
             <button id="delete" class="btnStyle">Delete</button>
         </form>
     </div>
@@ -134,7 +140,7 @@ else
                       <form style="width: 50%" action="home.php" method="post" enctype="multipart/form-data">
                           <div>
                           <input style="margin-left: 1% " id="file-upload" class="btnStyle"  type="file" name="fileToUpload" id="fileToUpload">
-                          <input class="btnStyle" type="submit" value="Upload Image" name="submit">
+                          <input id="uploadsub" class="btnStyle" type="submit" value="Upload Image" name="submit1">
                           </div>
                             <p style="color: red; padding: 1%"> <?php echo $err_upload?> </p>
                           <button id="startbutton" ">Take photo </button>

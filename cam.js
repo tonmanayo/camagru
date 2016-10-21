@@ -18,7 +18,7 @@
     var modalImg = null;
     var captionText = null;
     var span = null;
-
+    var submit = null;
 
     function startup() {
         //modal dec
@@ -35,10 +35,12 @@
         overlay2 = document.getElementById('img2');
         overlay3 = document.getElementById('img3');
 
+        submit = document.getElementById('submit');
+
 // Get access to the camera!
-        if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             // Not adding `{ audio: true }` since we only want video now
-            navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+            navigator.mediaDevices.getUserMedia({video: true}).then(function (stream) {
                 video.src = window.URL.createObjectURL(stream);
                 video.play();
             });
@@ -70,9 +72,23 @@
             ev.preventDefault();
         }, false);
 
+        submit.addEventListener('click', function (ev) {
+            add_img();
+            span_fun();
+            ev.preventDefault();
+        }, false);
+
+
+        /*     uploadsub.addEventListener('click', function (ev) {
+         // if (overlay_src != null)
+         //        modal_fun();
+         upload_pic();
+
+         });*/
+
         overlay1.addEventListener('click', function (ev) {
             change_1();
-            overlay_src = "img/face1.png" ;
+            overlay_src = "img/face1.png";
 
         });
 
@@ -89,6 +105,7 @@
 
         clearphoto();
     }
+
     ////////////
     function clearphoto() {
         var context = canvas.getContext('2d');
@@ -107,20 +124,19 @@
             context.drawImage(video, 0, 0, width, height);
             var data = canvas.toDataURL('image/png');
             var xmlhttp = new XMLHttpRequest();
-            xmlhttp.onreadystatechange = function() {
-                if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
-                {
-                 //   var side_container = document.getElementById("side-container");
-                  //  var node = document.createElement("img");
-                  //  node.src = xmlhttp.responseText;
-                  //  node.id = "photo";
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    //   var side_container = document.getElementById("side-container");
+                    //  var node = document.createElement("img");
+                    //  node.src = xmlhttp.responseText;
+                    //  node.id = "photo";
                     photo.setAttribute('src', xmlhttp.responseText);
-                   // side_container.appendChild(node);
+                    // side_container.appendChild(node);
                 }
             };
-            xmlhttp.open("POST","home.php",true);
-            xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-            if (overlay_src == null){
+            xmlhttp.open("POST", "home.php", true);
+            xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            if (overlay_src == null) {
                 alert("please select filter");
             }
             else {
@@ -131,6 +147,7 @@
             clearphoto();
         }
     }
+
     window.addEventListener('load', startup, false);
 
     function change_1() {
@@ -159,43 +176,59 @@
         modal.style.display = "block";
         modalImg.src = this.src;
     }
-      function span_fun() {
+
+    function span_fun() {
         modal.style.display = "none";
     }
 
-    function upload_pic() {
-        if (width && height) {
-            var xmlhttp = new XMLHttpRequest();
-            xmlhttp.onreadystatechange = function() {
-                if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
-                {
-                       var side_container = document.getElementById("side-container");
-                      var node = document.createElement("img");
-                      node.src = xmlhttp.responseText;
-                      node.id = "photo";
-                    photo.setAttribute('src', xmlhttp.responseText);
+    /*  function upload_pic() {
+     alert("toto");
+     var xmlhttp = new XMLHttpRequest();
+     xmlhttp.onreadystatechange = function() {
+     if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+     {
+
+     alert(xmlhttp.responseText);
+     return false;
+
+     }
+     };
+
+     xmlhttp.open("POST","home.php",true);
+     xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+     if (overlay_src == null){
+     alert("please select filter");
+     }
+     else {
+     xmlhttp.send("overlay=" + overlay_src + "&upload1=true");
+     }
+     }*/
+    /////////////////////////
+
+    function add_img() {
+
+        var xmlhttp = new XMLHttpRequest();
+        var src = document.getElementById('photo').src;
+        var comment = document.getElementById('comments').value;
+
+
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                if (xmlhttp.responseText == "success"){
+                    var side_container = document.getElementById("side-container");
+                    var node = document.createElement("img");
+                    node.src = src;
+                    node.id = "photo";
                     side_container.appendChild(node);
                 }
-            };
-            xmlhttp.open("POST","home.php",true);
-            xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-            if (overlay_src == null){
-                alert("please select filter");
             }
-            else {
-                xmlhttp.send("overlay=" + overlay_src);
-            }
-
-        } else {
-            clearphoto();
-        }
-
+        };
+        xmlhttp.open("POST", "home.php", true);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlhttp.send("submitpic=true&usercomment=" + comment);
 
 
     }
-    /////////////////////////
-
-
 
 })();
 
